@@ -16,8 +16,8 @@
                 <thead>
                     <tr class="text-center">
                         <th style="width: 5%">No.</th>
-                        <th style="width:40%">Kategori Barang</th>
-                        <th style="width:15%">Deskripsi</th>
+                        <th style="width:20%">Kategori Barang</th>
+                        <th style="width:45%">Deskripsi</th>
                         <th style="15%">Aksi</th>
                     </tr>
                 </thead>
