@@ -58,5 +58,4 @@ Route::group(['prefix' => '/transaksi', 'as' => 'transaksi.'], function () {
     Route::get('/create', [TransaksiController::class, 'create'])->name('create');
     Route::post('/store', [TransaksiController::class, 'store'])->name('store');
     Route::delete('/destroy/{id}', [TransaksiController::class, 'destroy'])->name('destroy');
-    Route::get('/cek-limit/{id}', [TransaksiController::class, 'cekLimit'])->name('cekLimit');
 });

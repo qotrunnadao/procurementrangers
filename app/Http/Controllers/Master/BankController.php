@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Master\Bank;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BankController extends Controller
@@ -36,10 +37,11 @@ class BankController extends Controller
 
     public function destroy($id)
     {
-        if (Bank::where('id', $id)->delete()) {
+        try {
+            Bank::where('id', $id)->delete();
             toast('Data bank berhasil dihapus!', 'success');
-        } else {
-            toast('Data bank gagal dihapus!', 'error');
+        } catch (Exception $e) {
+            toast('Data tidak dapat dihapus karena data bank telah digunakan!', 'error');
         }
 
         return redirect()->back();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use Exception;
 use App\Models\Master\Bank;
 use Illuminate\Http\Request;
 use App\Models\Master\Vendor;
@@ -38,10 +39,11 @@ class VendorController extends Controller
 
     public function destroy($id)
     {
-        if (Vendor::where('id', $id)->delete()) {
+        try {
+            Vendor::where('id', $id)->delete();
             toast('Data vendor berhasil dihapus!', 'success');
-        } else {
-            toast('Data vendor gagal dihapus!', 'error');
+        } catch (Exception $e) {
+            toast('Data tidak dapat dihapus karena data vendor telah digunakan!', 'error');
         }
 
         return redirect()->back();

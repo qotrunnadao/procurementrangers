@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Http\Controllers\Controller;
-use App\Models\Master\Kategori;
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\Master\Kategori;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KategoriController extends Controller
@@ -36,10 +37,11 @@ class KategoriController extends Controller
 
     public function destroy($id)
     {
-        if (Kategori::where('id', $id)->delete()) {
+        try {
+            Kategori::where('id', $id)->delete();
             toast('Data kategori berhasil dihapus!', 'success');
-        } else {
-            toast('Data kategori gagal dihapus!', 'error');
+        } catch (Exception $e) {
+            toast('Data tidak dapat dihapus karena data kategori telah digunakan!', 'error');
         }
 
         return redirect()->back();

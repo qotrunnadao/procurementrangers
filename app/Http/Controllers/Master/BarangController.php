@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Http\Controllers\Controller;
+use Exception;
+use Illuminate\Http\Request;
 use App\Models\Master\Barang;
 use App\Models\Master\Kategori;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
@@ -56,10 +57,11 @@ class BarangController extends Controller
 
     public function destroy($id)
     {
-        if (Barang::where('id', $id)->delete()) {
+        try {
+            Barang::where('id', $id)->delete();
             toast('Data barang berhasil dihapus!', 'success');
-        } else {
-            toast('Data barang gagal dihapus!', 'error');
+        } catch (Exception $e) {
+            toast('Data tidak dapat dihapus karena data barang telah digunakan!', 'error');
         }
 
         return redirect()->back();

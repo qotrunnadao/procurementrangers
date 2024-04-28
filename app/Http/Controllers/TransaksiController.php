@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Transaksi;
 use App\Models\Master\Bank;
 use Illuminate\Http\Request;
@@ -64,17 +65,13 @@ class TransaksiController extends Controller
 
     public function destroy($id)
     {
-        if (Transaksi::where('id', $id)->delete()) {
+        try {
+            Transaksi::where('id', $id)->delete();
             toast('Data transaksi berhasil dihapus!', 'success');
-        } else {
+        } catch (Exception $e) {
             toast('Data transaksi gagal dihapus!', 'error');
         }
 
         return redirect()->back();
-    }
-
-    public function cekLimit($id)
-    {
-        dd($id);
     }
 }
